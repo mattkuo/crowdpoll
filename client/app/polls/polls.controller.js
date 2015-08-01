@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('crowdpollApp')
-  .controller('HomeCtrl', function ($scope) {
+  .controller('PollsCtrl', function ($scope) {
     $scope.message = 'Hello';
   });
