@@ -7,7 +7,7 @@ var PollSchema = new Schema({
   name: String,
   info: String,
   active: Boolean,
-  user: {
+  owner: {
     type: Schema.Types.ObjectId,
     ref: 'User'
   },

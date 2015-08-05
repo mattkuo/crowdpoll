@@ -5,7 +5,13 @@ var Poll = require('./poll.model');
 
 // Get list of polls
 exports.index = function(req, res) {
-  Poll.find(function (err, polls) {
+  var query = {};
+
+  if (req.query.owner) {
+    query.owner = req.query.owner;
+  }
+
+  Poll.find(query, function (err, polls) {
     if(err) { return handleError(res, err); }
     return res.status(200).json(polls);
   });
