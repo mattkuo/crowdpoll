@@ -15,7 +15,7 @@ angular.module('crowdpollApp')
         })
         .then( function() {
           // Logged in, redirect to home
-          $location.path('/');
+          $location.path('/polls');
         })
         .catch( function(err) {
           $scope.errors.other = err.message;

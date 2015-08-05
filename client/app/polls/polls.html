@@ -1,0 +1,38 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div>
+  <header class="hero-unit" id="banner">
+    <div class="container">
+      <h1>My Polls</h1>
+      <p class="lead">Create custom polls and share the results!</p>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="page-header">Polls</h1>
+
+        <div class="row">
+          <div ng-repeat="poll in userPolls" class="col-lg-8">
+
+            <div class="container-center">
+              <div>{{ poll.name }}</div>
+              <small class="text-muted">{{ poll.info }}</small>
+            </div>
+
+            <div class="container-center">
+              <div class="badge">{{ totalVotes(poll) }}</div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div ng-include="'components/footer/footer.html'"></div>
