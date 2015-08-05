@@ -9,16 +9,30 @@
   </header>
 
   <div class="container">
+
     <div class="row">
       <div class="col-lg-12">
-        <h1 class="page-header">Intro text about app</h1>
-        <p>
-          Donec id justo. Praesent porttitor, nulla vitae posuere iaculis,
-          arcu nisl dignissim dolor, a pretium mi sem ut ipsum. Etiam rhoncus.
-        </p>
+        <h1 class="page-header">Polls</h1>
+
+        <div class="row">
+          <div ng-repeat="poll in userPolls" class="col-lg-8">
+
+            <div class="container-center">
+              <div>{{ poll.name }}</div>
+              <small class="text-muted">{{ poll.info }}</small>
+            </div>
+
+            <div class="container-center">
+              <div class="badge">{{ totalVotes(poll) }}</div>
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
+
 </div>
 
 <div ng-include="'components/footer/footer.html'"></div>
