@@ -12,7 +12,7 @@ var PollSchema = new Schema({
     ref: 'User'
   },
   fields: [new Schema({
-    option: String,
+    optionName: String,
     votes: Number
   })]
 });
