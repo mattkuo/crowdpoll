@@ -12,21 +12,55 @@
 
     <div class="row">
       <div class="col-lg-12">
-        <h1 class="page-header">Polls</h1>
 
-        <div class="row">
-          <div ng-repeat="poll in userPolls" class="col-lg-8">
 
-            <div class="container-center">
-              <div>{{ poll.name }}</div>
-              <small class="text-muted">{{ poll.info }}</small>
-            </div>
+        <div class="btn-group">
+          <button type="button" ng-click="setSelectedTab(0)" ng-class="['btn', 'btn-default', {active: selectedTab === 0}]">My Polls</button>
+          <button type="button" ng-click="setSelectedTab(1)" ng-class="['btn', 'btn-default', {active: selectedTab === 1}]">
+            <span class="glyphicon glyphicon-plus"></span>
+          </button>
+        </div>
 
-            <div class="container-center">
+        <ul class="list-group" ng-show="selectedTab === 0">
+          <li class="list-group-item" ng-repeat="poll in userPolls">
+            <a href>
+              <h4 class="list-group-item-heading">{{ poll.name }}</h4>
+              <p class="list-group-item-text">{{ poll.info }}</p>
+            </a>
+
+            <div class="controls">
+              <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
               <div class="badge">{{ totalVotes(poll) }}</div>
             </div>
 
-          </div>
+          </li>
+        </ul>
+
+        <div class="row" ng-show="selectedTab === 1">
+          <form class="col-lg-6" name="pollForm" ng-submit="savePoll()" novalidate>
+            <div class="form-group">
+                <input class="form-control" ng-model="pollQuestion" type="text" placeholder="Question" required>
+            </div>
+
+            <div class="form-group">
+                <textarea class="form-control" ng-model="pollInfo" placeholder="Poll Description"></textarea>
+            </div>
+
+            <div ng-repeat="option in pollOption track by $index" class="form-group">
+              <div class="input-group">
+                <input type="text" class="form-control" ng-model="option.optionName" placeholder="Poll option..." required>
+                <span class="input-group-btn">
+                  <button class="btn btn-danger" ng-click="removeOption($index)">
+                    <span class="glyphicon glyphicon-remove"></span>
+                  </button>
+                </span>
+              </div>
+            </div>
+
+            <button class="btn btn-default" ng-click="addOption()">Add Option</button>
+            <button class="btn btn-primary" type="submit" ng-disabled="pollForm.$invalid">Save</button>
+
+          </form>
         </div>
 
       </div>
