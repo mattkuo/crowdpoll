@@ -21,23 +21,20 @@
           </button>
         </div>
 
+        <ul class="list-group" ng-show="selectedTab === 0">
+          <li class="list-group-item" ng-repeat="poll in userPolls">
+            <a href>
+              <h4 class="list-group-item-heading">{{ poll.name }}</h4>
+              <p class="list-group-item-text">{{ poll.info }}</p>
+            </a>
 
-
-        <div class="row" ng-show="selectedTab === 0">
-
-          <div ng-repeat="poll in userPolls" class="col-lg-8">
-
-            <div class="container-center">
-              <div>{{ poll.name }}</div>
-              <small class="text-muted">{{ poll.info }}</small>
-            </div>
-
-            <div class="container-center">
+            <div class="controls">
+              <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
               <div class="badge">{{ totalVotes(poll) }}</div>
             </div>
 
-          </div>
-        </div>
+          </li>
+        </ul>
 
         <div class="row" ng-show="selectedTab === 1">
           <form class="col-lg-6" name="pollForm" ng-submit="savePoll()" novalidate>

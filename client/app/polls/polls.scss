@@ -1,9 +1,18 @@
 .container-center {
   display:table-cell;
   vertical-align: middle;
-  padding-right: 15px;
+}
+
+.inline-block {
+  display: inline-block;
 }
 
 .btn-group {
   margin: 2em 0;
+}
+
+.list-group-item .controls {
+  position: absolute;
+  right: 10px;
+  top: percentage(1/3);
 }
