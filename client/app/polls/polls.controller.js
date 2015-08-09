@@ -11,11 +11,21 @@ angular.module('crowdpollApp')
     ];
 
     $scope.selectedTab = 0;
+    $scope.alerts = [];
 
     $scope.refreshUserPolls = function() {
       $http.get('/api/polls?owner=' + Auth.getCurrentUser()._id).success(function(polls) {
         $scope.userPolls = polls;
       });
+    };
+    
+    $scope.resetPollData = function() {
+      $scope.pollQuestion = '';
+      $scope.pollInfo = '';
+      $scope.pollOption = [
+        {optionName: '', votes: 0},
+        {optionName: '', votes: 0}
+      ];
     };
 
     $scope.totalVotes = function(poll) {
@@ -47,13 +57,31 @@ angular.module('crowdpollApp')
       };
 
       $http.post('/api/polls', poll).success(function(data) {
-        // TODO: Display sharing options
-        console.log(data);
+        $scope.addAlert('Poll was successfully saved!', 'success');
         $scope.refreshUserPolls();
         $scope.setSelectedTab(0);
+        $scope.resetPollData();
+      }).error(function(err) {
+        $scope.addAlert(err, 'danger');
       });
     };
-
-    $scope.refreshUserPolls();
+    
+    $scope.addAlert = function(msg, type) {
+      $scope.alerts.push({
+        msg: msg,
+        type: type
+      });
+    };
+    
+    $scope.removeAlert = function(index) {
+      $scope.alerts.splice(index, 1);
+    };
+    
+    Auth.isLoggedInAsync(function(loggedIn) {
+      if (loggedIn) {
+        $scope.refreshUserPolls();
+      }
+    });
+    
 
   });

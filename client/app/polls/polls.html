@@ -20,6 +20,8 @@
             <span class="glyphicon glyphicon-plus"></span>
           </button>
         </div>
+        
+        <alert class="fade in" ng-repeat="alert in alerts" type="{{ alert.type }}" close="removeAlert($index)" dismiss-on-timeout="5000">{{ alert.msg }}</alert>
 
         <ul class="list-group" ng-show="selectedTab === 0">
           <li class="list-group-item" ng-repeat="poll in userPolls">
