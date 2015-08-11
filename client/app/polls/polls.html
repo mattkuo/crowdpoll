@@ -21,7 +21,7 @@
           </button>
         </div>
 
-        <alert class="alert-animate" ng-repeat="alert in alerts" type="{{ alert.type }}" close="removeAlert($index)" dismiss-on-timeout="5000">{{ alert.msg }}</alert>
+        <alert ng-repeat="alert in alerts" type="{{ alert.type }}" close="alert.close()" dismiss-on-timeout="5000">{{ alert.msg }}</alert>
 
         <ul class="list-group" ng-show="selectedTab === 0">
           <li class="list-group-item" ng-repeat="poll in userPolls">

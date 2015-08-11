@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('crowdpollApp')
-  .controller('PollsCtrl', function ($scope, $http, Auth) {
+  .controller('PollsCtrl', function ($scope, $http, Auth, alertFactory) {
     $scope.userPolls = [];
     $scope.pollQuestion = '';
     $scope.pollInfo = '';
@@ -11,7 +11,6 @@ angular.module('crowdpollApp')
     ];
 
     $scope.selectedTab = 0;
-    $scope.alerts = [];
 
     $scope.refreshUserPolls = function() {
       $http.get('/api/polls?owner=' + Auth.getCurrentUser()._id).success(function(polls) {
@@ -57,12 +56,12 @@ angular.module('crowdpollApp')
       };
 
       $http.post('/api/polls', poll).then(function() {
-        $scope.addAlert('Poll was successfully saved!', 'success');
+        alertFactory.add('Poll was successfully saved!', 'success');
         $scope.refreshUserPolls();
         $scope.setSelectedTab(0);
         $scope.resetPollData();
       },function(err) {
-        $scope.addAlert(err, 'danger');
+        alertFactory.add(err, 'danger');
       });
     };
 
@@ -73,22 +72,11 @@ angular.module('crowdpollApp')
 
       var poll = $scope.userPolls[index];
       $http.delete('/api/polls/' + poll._id).then(function() {
-        $scope.addAlert('Poll was successfully deleted.', 'success');
+        alertFactory.add('The poll was successfully deleted.', 'success');
         $scope.userPolls.splice(index, 1);
       }, function() {
-        $scope.addAlert('Error deleting poll. Please try again later', 'danger');
+        alertFactory.add('Error deleting poll. Please try again later', 'danger');
       });
-    };
-
-    $scope.addAlert = function(msg, type) {
-      $scope.alerts.push({
-        msg: msg,
-        type: type
-      });
-    };
-
-    $scope.removeAlert = function(index) {
-      $scope.alerts.splice(index, 1);
     };
 
     Auth.isLoggedInAsync(function(loggedIn) {
