@@ -18,7 +18,7 @@ angular.module('crowdpollApp')
         $scope.userPolls = polls;
       });
     };
-    
+
     $scope.resetPollData = function() {
       $scope.pollQuestion = '';
       $scope.pollInfo = '';
@@ -56,32 +56,45 @@ angular.module('crowdpollApp')
         fields: $scope.pollOption
       };
 
-      $http.post('/api/polls', poll).success(function(data) {
+      $http.post('/api/polls', poll).then(function() {
         $scope.addAlert('Poll was successfully saved!', 'success');
         $scope.refreshUserPolls();
         $scope.setSelectedTab(0);
         $scope.resetPollData();
-      }).error(function(err) {
+      },function(err) {
         $scope.addAlert(err, 'danger');
       });
     };
-    
+
+    $scope.removePoll = function(index) {
+      var prompt = window.confirm('Are you sure you want to delete this poll? (This action cannot be undone)');
+
+      if (!prompt) { return; }
+
+      var poll = $scope.userPolls[index];
+      $http.delete('/api/polls/' + poll._id).then(function() {
+        $scope.addAlert('Poll was successfully deleted.', 'success');
+        $scope.userPolls.splice(index, 1);
+      }, function() {
+        $scope.addAlert('Error deleting poll. Please try again later', 'danger');
+      });
+    };
+
     $scope.addAlert = function(msg, type) {
       $scope.alerts.push({
         msg: msg,
         type: type
       });
     };
-    
+
     $scope.removeAlert = function(index) {
       $scope.alerts.splice(index, 1);
     };
-    
+
     Auth.isLoggedInAsync(function(loggedIn) {
       if (loggedIn) {
         $scope.refreshUserPolls();
       }
     });
-    
 
   });
