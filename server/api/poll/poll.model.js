@@ -13,7 +13,10 @@ var PollSchema = new Schema({
   },
   fields: [new Schema({
     optionName: String,
-    votes: Number
+    votes: [{
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }]
   })]
 });
 

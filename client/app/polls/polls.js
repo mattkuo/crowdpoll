@@ -7,5 +7,10 @@ angular.module('crowdpollApp')
         templateUrl: 'app/polls/polls.html',
         controller: 'PollsCtrl',
         authenticate: true
+      })
+
+      .when('/polls/:id', {
+        templateUrl: 'app/showPoll/showPoll.html',
+        controller: 'ShowPollCtrl'
       });
   });

@@ -16,3 +16,10 @@
   right: 10px;
   top: percentage(1/3);
 }
+
+.repeat-animate {
+  .leave {
+    -webkit-transition:all linear 0.5s;
+    transition:all linear 0.5s;
+  }
+}

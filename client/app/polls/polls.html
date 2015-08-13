@@ -20,18 +20,18 @@
             <span class="glyphicon glyphicon-plus"></span>
           </button>
         </div>
-        
-        <alert class="fade in" ng-repeat="alert in alerts" type="{{ alert.type }}" close="removeAlert($index)" dismiss-on-timeout="5000">{{ alert.msg }}</alert>
+
+        <alert ng-repeat="alert in alerts" type="{{ alert.type }}" close="alert.close()" dismiss-on-timeout="5000">{{ alert.msg }}</alert>
 
         <ul class="list-group" ng-show="selectedTab === 0">
           <li class="list-group-item" ng-repeat="poll in userPolls">
-            <a href>
+            <a ng-href="/polls/{{ poll._id }}">
               <h4 class="list-group-item-heading">{{ poll.name }}</h4>
               <p class="list-group-item-text">{{ poll.info }}</p>
             </a>
 
             <div class="controls">
-              <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
+              <button class="btn btn-danger btn-xs" ng-click="removePoll($index)"><span class="glyphicon glyphicon-remove"></span></button>
               <div class="badge">{{ totalVotes(poll) }}</div>
             </div>
 

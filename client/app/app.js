@@ -5,7 +5,9 @@ angular.module('crowdpollApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ngAnimate',
+  'chart.js'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
