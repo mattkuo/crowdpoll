@@ -3,17 +3,16 @@
 <div>
   <header class="hero-unit" id="banner">
     <div class="container">
-      <h1>My Polls</h1>
-      <p class="lead">Create custom polls and share the results!</p>
+      <h1>{{ pollName }}</h1>
+      <p class="lead">{{ pollInfo }}</p>
     </div>
   </header>
 
   <div class="container">
 
     <div class="row">
-      <div class="col-lg-12">
-
-
+      <div class="col-lg-4 col-lg-offset-4 top-offset">
+        <canvas id="pie" class="chart chart-pie" data="data" labels="labels" legend="true"></canvas>
       </div>
     </div>
   </div>
