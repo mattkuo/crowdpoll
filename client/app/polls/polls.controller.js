@@ -29,7 +29,7 @@ angular.module('crowdpollApp')
 
     $scope.totalVotes = function(poll) {
       return poll.fields.reduce(function(prev, current) {
-        return prev + current.votes;
+        return prev + current.votes.length;
       }, 0);
     };
 
@@ -38,7 +38,7 @@ angular.module('crowdpollApp')
     };
 
     $scope.addOption = function() {
-      $scope.pollOption.push({optionName: '', votes: 0});
+      $scope.pollOption.push({optionName: '', votes: []});
     };
 
     $scope.removeOption = function(index) {

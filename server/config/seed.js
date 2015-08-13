@@ -52,8 +52,9 @@ User.find({}).remove(function() {
           info: 'testpollinfo',
           active: true,
           fields: [
-            { option: 'First option', votes: 0},
-            { option: 'asdff option', votes: 2},
+            { option: 'First option', votes: [testUser._id]},
+            { option: 'asdff option', votes: [admin._id, testUser._id]},
+            { option: 'third option', votes: []}
           ],
           owner: admin._id
         });
