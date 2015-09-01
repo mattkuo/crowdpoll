@@ -2,10 +2,10 @@
 
 angular.module('crowdpollApp')
   .controller('ShowPollCtrl', function ($scope, $http, $routeParams) {
-    $scope.pollName = '';
-    $scope.pollInfo = '';
     $scope.labels = [];
     $scope.data = [];
+    $scope.poll = {};
+    $scope.selectedOption = '';
 
     $http.get('/api/polls/' + $routeParams.id).then(function(data) {
 
@@ -14,9 +14,7 @@ angular.module('crowdpollApp')
       }
 
       var poll = data.data;
-
-      $scope.pollName = poll.name;
-      $scope.pollInfo = poll.info;
+      $scope.poll = poll;
 
       poll.fields.forEach(function(field) {
         $scope.labels.push(field.optionName);
@@ -26,4 +24,5 @@ angular.module('crowdpollApp')
     }, function(err) {
       console.log(err);
     });
+
   });

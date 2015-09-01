@@ -8,18 +8,25 @@ angular.module('crowdpollApp')
      * @param  {String} modalClass - (optional) class(es) to be applied to the modal
      * @return {Object}            - the instance $modal.open() returns
      */
-    function openModal(scope, modalClass) {
+    function openModal(scope, modalClass, controller) {
       var modalScope = $rootScope.$new();
       scope = scope || {};
       modalClass = modalClass || 'modal-default';
 
       angular.extend(modalScope, scope);
 
-      return $modal.open({
+      var config = {
         templateUrl: 'components/modal/modal.html',
         windowClass: modalClass,
-        scope: modalScope
-      });
+        scope: modalScope,
+      };
+
+      if (controller) {
+        config.controller = controller;
+        config.bindToController = true;
+      }
+
+      return $modal.open(config);
     }
 
     // Public API here
@@ -71,7 +78,45 @@ angular.module('crowdpollApp')
               del.apply(event, args);
             });
           };
+        },
+
+        save: function(sav) {
+          sav = sav || angular.noop;
+
+          return function() {
+            var args = Array.prototype.slice(arguments),
+                saveModal;
+
+            saveModal = openModal({
+              modal: {
+                dismissable: true,
+                title: 'Create Poll',
+                include: 'components/modal/pollmodal.html',
+                buttons: [{
+                  classes: 'btn-default pull-left',
+                  text: 'Add Option',
+                  click: function(e) {
+                    var scope = angular.element(e.currentTarget).scope();
+                    scope.addOption();
+                  }
+                }, {
+                  classes: 'btn-primary',
+                  text: 'Save',
+                  click: function(e) {
+                    var scope = angular.element(e.currentTarget).scope();
+                    scope.savePoll();
+                    saveModal.close(e);
+                  }
+                }]
+              }
+            }, 'modal-primary', 'PollModalController as PollModalCtrl');
+
+            saveModal.result.then(function(event) {
+              sav.apply(event, args);
+            });
+          };
         }
+
       }
     };
   });

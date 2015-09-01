@@ -1,0 +1,23 @@
+<form name="pollForm" ng-submit="savePoll()" novalidate>
+  <div class="form-group">
+      <input class="form-control" ng-model="titles.pollQuestion" type="text" placeholder="Question" required>
+  </div>
+
+  <div class="form-group">
+      <textarea class="form-control" ng-model="titles.pollInfo" placeholder="Poll Description"></textarea>
+  </div>
+
+  <div ng-repeat="option in pollOption track by $index" class="form-group">
+    <div class="input-group">
+      <input type="text" class="form-control" ng-model="option.optionName" placeholder="Poll option..." required>
+      <span class="input-group-btn">
+        <button class="btn btn-danger" type="button" ng-click="removeOption($index)">
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
+      </span>
+    </div>
+  </div>
+
+  <!-- <button class="btn btn-default" ng-click="addOption()" type="button">Add Option</button>
+  <button class="btn btn-primary" type="submit" ng-disabled="pollForm.$invalid">Save</button> -->
+</form>

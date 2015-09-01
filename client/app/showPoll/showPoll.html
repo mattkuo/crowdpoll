@@ -3,15 +3,35 @@
 <div>
   <header class="hero-unit" id="banner">
     <div class="container">
-      <h1>{{ pollName }}</h1>
-      <p class="lead">{{ pollInfo }}</p>
+      <h1>{{ poll.name }}</h1>
+      <p class="lead">{{ poll.info }}</p>
     </div>
   </header>
 
   <div class="container">
 
-    <div class="row">
-      <div class="col-lg-4 col-lg-offset-4 top-offset">
+    <div class="row top-offset">
+      <div class="col-lg-6 col-lg-offset-3">
+        <div class="panel panel-primary">
+          <div class="panel-heading">{{ poll.name }}</div>
+          <div class="panel-body">
+            <form name="votingForm">
+              <div class="radio form-group" ng-repeat="opt in poll.fields">
+                <label>
+                  <input ng-model="$parent.selectedOption" type="radio" name="option" value="{{ opt._id }}">{{ opt.optionName }}
+                </label>
+              </div>
+            </form>
+          </div>
+          <div class="panel-footer">
+            <button ng-click="submitVote()" ng-disabled="!selectedOption" class="btn btn-primary" type="button">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row top-offset">
+      <div class="col-lg-4 col-lg-offset-4">
         <canvas id="pie" class="chart chart-pie" data="data" labels="labels" legend="true"></canvas>
       </div>
     </div>
