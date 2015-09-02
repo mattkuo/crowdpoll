@@ -3,6 +3,8 @@
 angular.module('crowdpollApp')
   .controller('PollsCtrl', function ($scope, $http, Auth, alertFactory, Modal) {
 
+    $scope.userPolls = [];
+
     $scope.refreshUserPolls = function() {
       $http.get('/api/polls?owner=' + Auth.getCurrentUser()._id).success(function(polls) {
         $scope.userPolls = polls;
@@ -10,7 +12,7 @@ angular.module('crowdpollApp')
     };
 
     $scope.openPollModal = function() {
-      Modal.confirm.save()();
+      Modal.confirm.save($scope.refreshUserPolls)();
     };
 
 

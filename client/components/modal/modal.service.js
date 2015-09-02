@@ -100,6 +100,12 @@ angular.module('crowdpollApp')
                     scope.addOption();
                   }
                 }, {
+                  classes: 'btn-default',
+                  text: 'Cancel',
+                  click: function(e) {
+                    saveModal.dismiss(e);
+                  }
+                }, {
                   classes: 'btn-primary',
                   text: 'Save',
                   click: function(e) {
