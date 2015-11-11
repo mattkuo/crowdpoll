@@ -18,13 +18,13 @@
             <form name="votingForm">
               <div class="radio form-group" ng-repeat="opt in poll.fields">
                 <label>
-                  <input ng-model="$parent.selectedOption" type="radio" name="option" value="{{ opt._id }}">{{ opt.optionName }}
+                  <input ng-model="data.selectedOptions" type="radio" name="option" value="{{ opt._id }}">{{ opt.optionName }}
                 </label>
               </div>
             </form>
           </div>
           <div class="panel-footer">
-            <button ng-click="submitVote()" ng-disabled="!selectedOption" class="btn btn-primary" type="button">Submit</button>
+            <button ng-click="submitVote()" ng-disabled="!data.selectedOptions" class="btn btn-primary" type="submit">Submit</button>
           </div>
         </div>
       </div>
@@ -32,7 +32,7 @@
 
     <div class="row top-offset">
       <div class="col-lg-4 col-lg-offset-4">
-        <canvas id="pie" class="chart chart-pie" data="data" labels="labels" legend="true"></canvas>
+        <canvas id="pie" class="chart chart-pie" data="data.votes" labels="data.optionNames" legend="true"></canvas>
       </div>
     </div>
   </div>
