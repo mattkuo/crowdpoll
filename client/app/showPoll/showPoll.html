@@ -8,8 +8,9 @@
     </div>
   </header>
 
-  <div class="container">
+  <div ng-include="'components/alertFactory/alertFactory.html'"></div>
 
+  <div class="container">
     <div class="row top-offset">
       <div class="col-lg-6 col-lg-offset-3">
         <div class="panel panel-primary">
@@ -18,7 +19,7 @@
             <form name="votingForm">
               <div class="radio form-group" ng-repeat="opt in poll.fields">
                 <label>
-                  <input ng-model="data.selectedOptions" type="radio" name="option" value="{{ opt._id }}">{{ opt.optionName }}
+                  <input ng-disabled="data.hasAlreadyVoted" ng-model="data.selectedOptions" type="radio" name="option" value="{{ opt._id }}">{{ opt.optionName }}
                 </label>
               </div>
             </form>
@@ -30,7 +31,8 @@
       </div>
     </div>
 
-    <div class="row top-offset">
+    <div class="chart-container row top-offset">
+      <h2 ng-show="data.hasAlreadyVoted">Poll Result</h2>
       <div class="col-lg-4 col-lg-offset-4">
         <canvas id="pie" class="chart chart-pie" data="data.votes" labels="data.optionNames" legend="true"></canvas>
       </div>

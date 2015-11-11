@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-lg-12">
 
-        <alert ng-repeat="alert in alerts" type="{{ alert.type }}" close="alert.close()" dismiss-on-timeout="5000">{{ alert.msg }}</alert>
+        <div ng-include="'components/alertFactory/alertFactory.html'"></div>
 
         <button type="button" class="btn btn-primary" ng-click="openPollModal()">
           <span class="glyphicon glyphicon-plus"></span>Create New Poll

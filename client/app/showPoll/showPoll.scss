@@ -1,3 +1,9 @@
 .top-offset {
   margin-top: 2em;
 }
+
+.chart-container {
+  & > h2 {
+    text-align: center;
+  }
+}
