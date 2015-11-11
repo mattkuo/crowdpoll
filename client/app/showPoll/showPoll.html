@@ -25,7 +25,7 @@
             </form>
           </div>
           <div class="panel-footer">
-            <button ng-click="submitVote()" ng-disabled="!data.selectedOptions" class="btn btn-primary" type="submit">Submit</button>
+            <button ng-click="submitVote()" ng-disabled="!data.selectedOptions || data.hasAlreadyVoted" class="btn btn-primary" type="submit">Submit</button>
           </div>
         </div>
       </div>
