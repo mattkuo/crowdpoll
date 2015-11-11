@@ -32,3 +32,13 @@
 .navbar-text {
   margin-left: 15px;
 }
+
+.home {
+  .fa {
+    font-size: 8em;
+  }
+
+  & > div {
+    text-align: center;
+  }
+}
